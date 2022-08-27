@@ -16,6 +16,11 @@ int set(const struct int_array* self, int index, int value) {
     return 1;
 }
 
+void resize(struct int_array* self, int size) {
+    realloc(self->data, size * sizeof(int));
+    self->capacity = size;
+}
+
 void dispose(struct int_array* self) {
 
     if (self->data == NULL) {
@@ -50,8 +55,10 @@ int main(void) {
     int v = set(&arr, 1, 12);
     print(&arr);
     printf("Def [1] -> %d\n", get(&arr, 1));
-    // free(arr.data);
+
+    resize(&arr, 3);
+    print(&arr);
+
     dispose(&arr);
     print(&arr);
-    //dispose(&arr);
 }
